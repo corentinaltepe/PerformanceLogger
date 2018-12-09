@@ -1,4 +1,4 @@
-namespace perflogger
+namespace PerformanceLogger
 {
     /// <summary>
     /// Logging target, which writes the results of a IPerformanceLog

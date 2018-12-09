@@ -1,6 +1,6 @@
 using System;
 
-namespace perflogger
+namespace PerformanceLogger
 {
     /// <summary>
     /// Results of a single performance analysis, for a unit of work, method execution

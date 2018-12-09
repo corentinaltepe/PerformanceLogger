@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace perflogger
+namespace PerformanceLogger
 {
     public class PerformanceLog : IPerformanceLog
     {

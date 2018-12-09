@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace perflogger
+namespace PerformanceLogger
 {
     /// <summary>
     /// Performance Logger

@@ -1,14 +1,18 @@
 using System;
 using System.Diagnostics;
 
-namespace perflogger
+namespace PerformanceLogger
 {
     public class PerformanceLogger : IPerformanceLogger
     {
         private readonly IClock _clock;
-        public PerformanceLogger(IClock clock)
+        private readonly ITarget _target;
+        public PerformanceLogger(
+            IClock clock,
+            ITarget target)
         {
             _clock = clock;
+            _target = target;
         }
 
         public IPerformanceLog Start()
@@ -28,7 +32,7 @@ namespace perflogger
                 StartDate = _clock.Now
             };
 
-            return new PerformanceLog(stopwatch, report);
+            return new PerformanceLog(stopwatch, report, _target);
         }
     }
 }

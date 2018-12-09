@@ -1,6 +1,6 @@
 using System;
 
-namespace perflogger
+namespace PerformanceLogger
 {
     /// <summary>
     /// Abstraction layer to DateTime.Now

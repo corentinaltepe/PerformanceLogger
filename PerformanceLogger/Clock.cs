@@ -1,6 +1,6 @@
 using System;
 
-namespace perflogger
+namespace PerformanceLogger
 {
     /// <summary>
     /// Provides DateTime.Now

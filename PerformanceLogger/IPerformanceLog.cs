@@ -1,4 +1,4 @@
-namespace perflogger
+namespace PerformanceLogger
 {
     /// <summary>
     /// Tracks the performance (duration) of a single unit of work

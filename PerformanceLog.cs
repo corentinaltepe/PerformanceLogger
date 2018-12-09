@@ -6,12 +6,15 @@ namespace perflogger
     {
         private readonly Stopwatch _stopwatch;
         private readonly PerformanceResult _report;
+        private readonly ITarget _target;
         public PerformanceLog(
             Stopwatch stopwatch,
-            PerformanceResult report)
+            PerformanceResult report,
+            ITarget target)
         {
             _stopwatch = stopwatch;
             _report = report;
+            _target = target;
         }
 
         /// <summary>
@@ -19,7 +22,12 @@ namespace perflogger
         /// </summary>
         public void End()
         {
-            throw new System.NotImplementedException();
+            // Stop and record stopwatch
+            _stopwatch.Stop();
+            _report.Duration = _stopwatch.Elapsed;
+
+            // Write the result to the target(s)
+            _target.Log(_report);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using PerformanceLogger.ITargets;
 
 namespace PerformanceLogger
 {

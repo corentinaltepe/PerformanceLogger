@@ -3,7 +3,7 @@ using PerformanceLogger.ITargets;
 
 namespace PerformanceLogger
 {
-    public class PerformanceLog : IPerformanceLog
+    class PerformanceLog : IPerformanceLog
     {
         private readonly Stopwatch _stopwatch;
         private readonly PerformanceResult _report;

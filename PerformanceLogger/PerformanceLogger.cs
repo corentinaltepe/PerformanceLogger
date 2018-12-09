@@ -4,7 +4,7 @@ using PerformanceLogger.ITargets;
 
 namespace PerformanceLogger
 {
-    public class PerformanceLogger : IPerformanceLogger
+    class PerformanceLogger : IPerformanceLogger
     {
         private readonly IClock _clock;
         private readonly ITarget _target;

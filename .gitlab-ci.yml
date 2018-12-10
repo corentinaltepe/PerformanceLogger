@@ -8,6 +8,15 @@ build:
     untracked: true
     expire_in: 1 day
 
+# Runs the unit tests with coverage analysis
+sample-test:
+  stage: test
+  image: microsoft/dotnet:2.2-sdk
+  script:
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+  artifacts:
+    untracked: true
+    expire_in: 1 day
 
 # Runs the sample project, making sure it doesn't crash at runtime
 sample-test:
@@ -15,6 +24,3 @@ sample-test:
   image: microsoft/dotnet:2.2-sdk
   script:
   - dotnet run --project Sample
-  artifacts:
-    untracked: true
-    expire_in: 1 day

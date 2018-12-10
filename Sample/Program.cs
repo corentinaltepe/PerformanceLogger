@@ -9,7 +9,7 @@ namespace Sample
 {
     /// <summary>
     /// This is a sample console application demonstrating how to use the Performance Logger to track operation
-    /// execution times.
+    /// execution times, using the Logging extension (PerformanceLogger.Extensions.Logging).
     /// </summary>
     class Program
     {
@@ -28,12 +28,16 @@ namespace Sample
 
             // Build a performance logger
             var performanceLogger = new PerformanceLoggerBuilder()
-                .AddLogger(consoleLogger)
+                .AddLogger(consoleLogger)   // Adds the console logger as a target for logging the performance results
                 .Build();
 
-            // Performance a long running operation and log its performance
+            // Perform a long running operation and log its performance
             var perfTracker = performanceLogger.Start("my_long_task_01");
+
+            // Simulating a long running task
             Thread.Sleep(1000);
+
+            // End the tracking and log it
             perfTracker.End();            
 
             // Causes the loggers to flush their logs

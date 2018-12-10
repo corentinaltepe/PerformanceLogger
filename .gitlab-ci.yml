@@ -14,7 +14,7 @@ sample-test:
   stage: test
   image: microsoft/dotnet:2.2-sdk
   script:
-  - dotnet run Sample
+  - dotnet run --project Sample
   artifacts:
     untracked: true
     expire_in: 1 day

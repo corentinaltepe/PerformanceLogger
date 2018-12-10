@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace PerformanceLogger.Targets
+namespace PerformanceLogger.Extensions.Logging
 {
     /// <summary>
     /// Adapts ILogger interface to ITarget to write performance logs to an ILogger

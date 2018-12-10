@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Logging;
 using PerformanceLogger.Targets;
 
 namespace PerformanceLogger
@@ -10,25 +9,17 @@ namespace PerformanceLogger
     /// </summary>
     public class PerformanceLoggerBuilder
     {
-        private readonly List<ILogger> _loggers = new List<ILogger>();
-        /// <summary>
-        /// Adds a logger implementing Microsoft.Extensions.Logging.ILogger
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <returns></returns>
-        public PerformanceLoggerBuilder AddLogging(ILogger logger)
+        private readonly List<ITarget> _targets = new List<ITarget>();
+        public PerformanceLoggerBuilder AddTarget(ITarget target)
         {
-            _loggers.Add(logger);
+            _targets.Add(target);
             return this;
         }
 
         public IPerformanceLogger Build()
         {
-            // Create targets from the loggers
-            var loggingTargets = _loggers.Select(logger => new LoggerTarget(logger));
-
             // Aggregate the targets
-            var loggingTarget = new TargetAggregate(loggingTargets);
+            var loggingTarget = new TargetAggregate(_targets);
 
             // Instanciate the PerformanceLogger
             return new PerformanceLogger(new Clock(), loggingTarget);

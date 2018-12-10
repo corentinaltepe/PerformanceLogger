@@ -1,0 +1,9 @@
+build:
+  stage: build
+  image: microsoft/dotnet:2.2-sdk
+  script:
+  - dotnet build PerformanceLogger
+  - dotnet build Sample
+  artifacts:
+    untracked: true
+    expire_in: 1 day

@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Extensions.Logging;
-using PerformanceLogger.ITargets;
 
 namespace PerformanceLogger.Targets
 {

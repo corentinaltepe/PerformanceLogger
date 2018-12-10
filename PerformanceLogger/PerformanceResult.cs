@@ -6,7 +6,7 @@ namespace PerformanceLogger
     /// Results of a single performance analysis, for a unit of work, method execution
     /// or event processing.
     /// </summary>
-    class PerformanceResult
+    public class PerformanceResult
     {
         public string EventId { get; set; }
         public DateTime StartDate { get; set; }

@@ -1,4 +1,4 @@
-namespace PerformanceLogger.ITargets
+namespace PerformanceLogger.Targets
 {
     /// <summary>
     /// Logging target, which writes the results of a IPerformanceLog

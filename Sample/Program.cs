@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PerformanceLogger;
+using PerformanceLogger.Extensions.Logging;
 using System.Threading;
 
 namespace Sample
@@ -27,7 +28,7 @@ namespace Sample
 
             // Build a performance logger
             var performanceLogger = new PerformanceLoggerBuilder()
-                .AddLogging(consoleLogger)
+                .AddLogger(consoleLogger)
                 .Build();
 
             // Performance a long running operation and log its performance

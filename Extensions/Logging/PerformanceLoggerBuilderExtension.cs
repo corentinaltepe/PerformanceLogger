@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 
 namespace PerformanceLogger.Extensions.Logging
 {
-    // Extension methods must be defined in a static class.
     public static class PerformanceLoggerBuilderExtension
     {
         /// <summary>

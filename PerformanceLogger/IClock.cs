@@ -5,7 +5,7 @@ namespace PerformanceLogger
     /// <summary>
     /// Abstraction layer to DateTime.Now
     /// </summary>
-    public interface IClock
+    interface IClock
     {
         DateTime Now { get; }
     }

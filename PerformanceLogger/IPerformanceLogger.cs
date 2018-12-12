@@ -5,7 +5,7 @@ namespace PerformanceLogger
     /// <summary>
     /// Performance Logger
     /// </summary>
-    public interface IPerformanceLogger
+    public interface IPerformanceLogger : IDisposable
     {
         /// <summary>
         /// Initiates the tracking of a unit of work's performance

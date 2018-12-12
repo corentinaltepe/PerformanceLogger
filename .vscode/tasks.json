@@ -3,6 +3,16 @@
     "tasks": [
         {
             "label": "build",
+            "dependsOn": [
+                "build-sample",
+                "build-core",
+                "build-test",
+                "build-extensions"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build-sample",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -10,6 +20,59 @@
                 "${workspaceFolder}/Sample/Sample.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-core",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/PerformanceLogger/PerformanceLogger.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-extension-postgres",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Extensions/Postgres/PerformanceLogger.Extensions.Postgres.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-extension-logging",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Extensions/Logging/PerformanceLogger.Extensions.Logging.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-test-core",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/PerformanceLogger/PerformanceLogger.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-test",
+            "dependsOn": [
+                "build-test-core"
+            ]
+        },
+        {
+            "label": "build-extensions",
+            "dependsOn": [
+                "build-extension-logging",
+                "build-extension-postgres"
+            ]
         }
     ]
 }

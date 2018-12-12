@@ -9,10 +9,10 @@ namespace PerformanceLogger
     /// <summary>
     /// Configures and builds a PerformanceLogger
     /// </summary>
-    public class PerformanceLoggerBuilder
+    public class PerformanceLoggerBuilder : IPerformanceLoggerBuilder
     {
         private readonly List<ITarget> _targets = new List<ITarget>();
-        public PerformanceLoggerBuilder AddTarget(ITarget target)
+        public IPerformanceLoggerBuilder AddTarget(ITarget target)
         {
             _targets.Add(target);
             return this;

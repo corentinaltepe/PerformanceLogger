@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+
+    <!-- Information for NuGet publication -->
+    <PackageId>PerformanceLogger</PackageId>
+    <Version Condition=" '$(BUILD_BUILDNUMBER)' == '' ">0.0.1-local</Version>
+    <Version Condition=" '$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</Version>
+    <Authors>Corentin Altepe</Authors>
+    <Company>Corentin Altepe</Company>
+    <RepositoryUrl>https://github.com/corentinaltepe/PerformanceLogger.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <License>https://github.com/corentinaltepe/PerformanceLogger/blob/master/LICENSE</License>
+
   </PropertyGroup>
 
 

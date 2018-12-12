@@ -18,5 +18,10 @@ namespace PerformanceLogger.Targets
         {
             _targets.ForEach(t => t.Log(report));
         }
+
+        public void Dispose()
+        {
+            _targets.ForEach(t => t.Dispose());
+        }
     }
 }

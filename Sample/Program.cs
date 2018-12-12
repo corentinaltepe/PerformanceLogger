@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PerformanceLogger;
 using PerformanceLogger.Extensions.Logging;
+using PerformanceLogger.Extensions.Postgres;
 using System.Threading;
 
 namespace Sample
@@ -26,21 +27,26 @@ namespace Sample
             
             consoleLogger.LogInformation("Application start");
 
-            // Build a performance logger
+            // Build a performance logger that will log into the console and in a Postgres database
             var performanceLogger = new PerformanceLoggerBuilder()
-                .AddLogger(consoleLogger)   // Adds the console logger as a target for logging the performance results
+                .AddLogger(consoleLogger)
+                .AddPostgres("Host=localhost;Username=postgres;Password=MYPASSWORD;Database=performancelogs", "logs")
                 .Build();
 
-            // Perform a long running operation and log its performance
-            var perfTracker = performanceLogger.Start("my_long_task_01");
+            // Perform the same operation 100 times and log its performance each time
+            for(int i = 0; i < 100; i++) {
+                // Perform a long running operation and log its performance
+                var perfTracker = performanceLogger.Start("my_long_task_01");
 
-            // Simulating a long running task
-            Thread.Sleep(1000);
+                // Simulating a long running task
+                Thread.Sleep(25);
 
-            // End the tracking and log it
-            perfTracker.End();            
+                // End the tracking and log it
+                perfTracker.End();           
+            } 
 
-            // Causes the loggers to flush their logs
+            // Causes the loggers to flush their logs, and the targets to end their parallel tasks
+            performanceLogger.Dispose();
             serviceProvider.Dispose();
         }
     }

@@ -35,5 +35,14 @@ namespace PerformanceLogger
 
             return new PerformanceLog(stopwatch, report, _target);
         }
+        
+
+        /// <summary>
+        /// Disposes the ITarget
+        /// </summary>
+        public void Dispose()
+        {
+            _target.Dispose();
+        }
     }
 }

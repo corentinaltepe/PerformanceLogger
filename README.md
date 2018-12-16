@@ -40,7 +40,7 @@ perfTracker.End();
 
 In the case of a console logger, the results will look like this :
 
-[logo]: https://github.com/corentinaltepe/PerformanceLogger/tree/master/Documentation/images/001.PNG "Results of performance log on a console logger"
+![Results of performance log on a console logger](https://raw.githubusercontent.com/corentinaltepe/PerformanceLogger/master/Documentation/images/001.PNG) 
 
 You are free to setup an ILogger with [NLog](https://github.com/NLog/NLog.Extensions.Logging), [log4net](http://logging.apache.org/log4net/), [Serilog](https://github.com/serilog/serilog-extensions-logging) or any other adapter.
 

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging " Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
@@ -17,6 +18,8 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Extensions\DependencyInjection\PerformanceLogger.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\..\..\Extensions\Logging\PerformanceLogger.Extensions.Logging.csproj" />
+    <ProjectReference Include="..\..\..\..\Extensions\Postgres\PerformanceLogger.Extensions.Postgres.csproj" />
   </ItemGroup>
 
 </Project>

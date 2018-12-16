@@ -9,6 +9,7 @@
     <ProjectReference Include="..\PerformanceLogger\PerformanceLogger.csproj" />
     <ProjectReference Include="..\Extensions\Logging\PerformanceLogger.Extensions.Logging.csproj" />
     <ProjectReference Include="..\Extensions\Postgres\PerformanceLogger.Extensions.Postgres.csproj" />
+    <ProjectReference Include="..\Extensions\DependencyInjection\PerformanceLogger.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
   
   <ItemGroup>

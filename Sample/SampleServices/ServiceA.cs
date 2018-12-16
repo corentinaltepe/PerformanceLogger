@@ -1,6 +1,7 @@
+using System.Threading;
 using PerformanceLogger;
 
-namespace DependencyInjection.SampleServices
+namespace Sample.SampleServices
 {
     /// <summary>
     /// Mock of a service implementing IService to test DependencyInjection extension
@@ -16,8 +17,11 @@ namespace DependencyInjection.SampleServices
         public void ExecuteSomething()
         {
             var tracker = _perfLogger.Start("servicea_execute_something");
+
+            // Simulate a long executing operation
+            Thread.Sleep(25);
+
             tracker.End();
-            // Do nothing
         }
 
         public void ExecuteSomethingWithArgument(string arg1)

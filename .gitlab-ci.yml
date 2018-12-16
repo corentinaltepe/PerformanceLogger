@@ -1,6 +1,7 @@
 build:
   stage: build
   image: microsoft/dotnet:2.2-sdk
+  dependencies: []
   script:
   - dotnet build PerformanceLogger
   - dotnet build Extensions/Logging
@@ -15,6 +16,7 @@ build:
 unit-test:
   stage: test
   image: microsoft/dotnet:2.2-sdk
+  dependencies: []
   script:
   - dotnet test Tests/Unit/PerformanceLogger.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
   artifacts:
@@ -25,6 +27,7 @@ unit-test:
 integration-tests:
   stage: test
   image: microsoft/dotnet:2.2-sdk
+  dependencies: []
   script:
   - echo "todo"
   only:
@@ -40,8 +43,10 @@ nuget-publication:
   - dotnet pack PerformanceLogger
   - dotnet pack Extensions/Logging
   - dotnet pack Extensions/Postgres
-  - dotnet nuget push PerformanceLogger/bin/Debug/PerformanceLogger.$CI_COMMIT_TAG.nupkg                        -k $nuget_key -s https://api.nuget.org/v3/index.json
-  - dotnet nuget push Extensions/Logging/bin/Debug/PerformanceLogger.Extensions.Logging.$CI_COMMIT_TAG.nupkg    -k $nuget_key -s https://api.nuget.org/v3/index.json
-  - dotnet nuget push Extensions/Postgres/bin/Debug/PerformanceLogger.Extensions.Postgres.$CI_COMMIT_TAG.nupkg  -k $nuget_key -s https://api.nuget.org/v3/index.json
+  - dotnet pack Extensions/DependencyInjection
+  - dotnet nuget push PerformanceLogger/bin/Debug/PerformanceLogger.$CI_COMMIT_TAG.nupkg                                              -k $nuget_key -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push Extensions/Logging/bin/Debug/PerformanceLogger.Extensions.Logging.$CI_COMMIT_TAG.nupkg                          -k $nuget_key -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push Extensions/Postgres/bin/Debug/PerformanceLogger.Extensions.Postgres.$CI_COMMIT_TAG.nupkg                        -k $nuget_key -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push Extensions/DependencyInjection/bin/Debug/PerformanceLogger.Extensions.DependencyInjection.$CI_COMMIT_TAG.nupkg  -k $nuget_key -s https://api.nuget.org/v3/index.json
   only:
   - tags

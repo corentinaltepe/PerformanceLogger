@@ -4,7 +4,9 @@ using Microsoft.Extensions.Logging;
 using PerformanceLogger;
 using PerformanceLogger.Extensions.Logging;
 using PerformanceLogger.Extensions.Postgres;
+using PerformanceLogger.Extensions.DependencyInjection;
 using System.Threading;
+using Sample.SampleServices;
 
 namespace Sample
 {
@@ -17,37 +19,32 @@ namespace Sample
         static void Main(string[] args)
         {
             // Instanciate a console logger, implementing ILogger. Will be used to show logs on console.
-            var serviceProvider = new ServiceCollection()
+            var provider = new ServiceCollection()
                 .AddLogging(builder => {
                     builder.AddConsole();
                     builder.SetMinimumLevel(LogLevel.Debug);
                 })
+                .AddPerformanceLogger(config => {
+                    config.AddLogging();
+                    config.AddPostgres("Host=localhost;Username=postgres;Password=ADMINVME;Database=performancelogs", "logs");
+                    config.AutoLogPerformance(typeof(IService));
+                })
+                .AddTransient<IService, ServiceB>()
+                .AddTransient<ServiceA>()
+                .AddTransient<ServiceB>()
                 .BuildServiceProvider();
-            var consoleLogger = serviceProvider.GetService<ILogger<Program>>();
-            
+
+            var consoleLogger = provider.GetService<ILogger<Program>>();
             consoleLogger.LogInformation("Application start");
 
-            // Build a performance logger that will log into the console and in a Postgres database
-            var performanceLogger = new PerformanceLoggerBuilder()
-                .AddLogger(consoleLogger)
-                .AddPostgres("Host=localhost;Username=postgres;Password=MYPASSWORD;Database=performancelogs", "logs")
-                .Build();
+            var serviceA = provider.GetService<ServiceA>();
+            var serviceB = provider.GetService<ServiceB>();
 
-            // Perform the same operation 100 times and log its performance each time
-            for(int i = 0; i < 100; i++) {
-                // Perform a long running operation and log its performance
-                var perfTracker = performanceLogger.Start("my_long_task_01");
-
-                // Simulating a long running task
-                Thread.Sleep(25);
-
-                // End the tracking and log it
-                perfTracker.End();           
-            } 
+            serviceA.ExecuteSomething();
+            serviceB.ExecuteSomething();
 
             // Causes the loggers to flush their logs, and the targets to end their parallel tasks
-            performanceLogger.Dispose();
-            serviceProvider.Dispose();
+            provider.Dispose();
         }
     }
 }

@@ -19,6 +19,7 @@ unit-test:
   dependencies: []
   script:
   - dotnet test Tests/Unit/PerformanceLogger.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+  - dotnet test Tests/Unit/Extensions/DependencyInjection.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
   artifacts:
     untracked: true
     expire_in: 1 day

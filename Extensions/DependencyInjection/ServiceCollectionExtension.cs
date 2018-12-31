@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PerformanceLogger.Targets;
 
+[assembly: InternalsVisibleTo("PerformanceLogger.Extensions.DependencyInjection.Test")]
 namespace PerformanceLogger.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtension
@@ -31,6 +34,20 @@ namespace PerformanceLogger.Extensions.DependencyInjection
 
             configure(new PerformanceLoggerDiOptions(services));
 
+            return services;
+        }
+
+        /// <summary>
+        /// Adds PerformanceLogger to the collection of services
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddAutoPerformanceLogging(
+            this IServiceCollection services,
+            IEnumerable<Type> serviceTypes)
+        {
+            // TODO: Auto-decorate on demand the services that need performance monitoring
             return services;
         }
     }

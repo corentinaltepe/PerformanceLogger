@@ -5,7 +5,7 @@ using PerformanceLogger.Extensions.DependencyInjection.Test.Services;
 
 namespace PerformanceLogger.Extensions.DependencyInjection.Test
 {
-    public class UnitTest1
+    public class PerformanceLoggingDecoratorTest
     {
         [Fact]
         public void DecoratePublicClass()

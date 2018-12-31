@@ -27,7 +27,6 @@ namespace Sample
                 .AddPerformanceLogger(config => {
                     config.AddLogging();
                     config.AddPostgres("Host=localhost;Username=postgres;Password=MYPASSWORD;Database=performancelogs", "logs");
-                    config.AutoLogPerformance(typeof(IService));
                 })
                 .AddTransient<IService, ServiceB>()
                 .AddTransient<ServiceA>()

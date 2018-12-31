@@ -11,12 +11,5 @@ namespace PerformanceLogger.Extensions.DependencyInjection
         {
             Services = services;
         }
-
-        public void AutoLogPerformance(Type serviceType)
-        {
-            Console.WriteLine($"Configuring decorator for {serviceType.Name}");
-            // WIP
-            // TODO : read https://github.com/castleproject/Core/blob/master/docs/dynamicproxy-introduction.md
-        }
     }
 }

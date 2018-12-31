@@ -4,13 +4,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PerformanceLogger.Extensions.DependencyInjection.AutoDecorators;
 using PerformanceLogger.Targets;
 
 [assembly: InternalsVisibleTo("PerformanceLogger.Extensions.DependencyInjection.Test")]
-
-// TODO : remove this one
-[assembly: InternalsVisibleTo("Sample")]
-
 namespace PerformanceLogger.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtension
@@ -42,16 +39,19 @@ namespace PerformanceLogger.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Adds PerformanceLogger to the collection of services
+        /// Adds PerformanceLogger to the interface or class T to be decorated
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configure"></param>
         /// <returns></returns>
-        public static IServiceCollection AddAutoPerformanceLogging(
-            this IServiceCollection services,
-            IEnumerable<Type> serviceTypes)
+        public static IServiceCollection AddAutoPerformanceLogging<T>(
+            this IServiceCollection services) where T : class
         {
-            // TODO: Auto-decorate on demand the services that need performance monitoring
+            // Decorate the service with a performance logger decorator
+            services.Decorate<T>((inner, provider) => { 
+                var decoratorFactory = new PerformanceLoggingDecoratorFactory(provider.GetService<IPerformanceLogger>());
+                return decoratorFactory.Decorate<T>(inner);
+            });
             return services;
         }
     }

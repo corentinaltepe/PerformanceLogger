@@ -19,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.3.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Scrutor" Version="3.0.2" />
   </ItemGroup>
   
   <ItemGroup>

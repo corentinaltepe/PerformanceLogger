@@ -7,6 +7,10 @@ using Microsoft.Extensions.Logging;
 using PerformanceLogger.Targets;
 
 [assembly: InternalsVisibleTo("PerformanceLogger.Extensions.DependencyInjection.Test")]
+
+// TODO : remove this one
+[assembly: InternalsVisibleTo("Sample")]
+
 namespace PerformanceLogger.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtension

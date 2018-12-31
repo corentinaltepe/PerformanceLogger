@@ -7,6 +7,7 @@ using PerformanceLogger.Extensions.Postgres;
 using PerformanceLogger.Extensions.DependencyInjection;
 using System.Threading;
 using Sample.SampleServices;
+using PerformanceLogger.Extensions.DependencyInjection.AutoDecorators;
 
 namespace Sample
 {
@@ -26,7 +27,7 @@ namespace Sample
                 })
                 .AddPerformanceLogger(config => {
                     config.AddLogging();
-                    config.AddPostgres("Host=localhost;Username=postgres;Password=ADMINVME;Database=performancelogs", "logs");
+                    //config.AddPostgres("Host=localhost;Username=postgres;Password=ADMINVME;Database=performancelogs", "logs");
                     config.AutoLogPerformance(typeof(IService));
                 })
                 .AddTransient<IService, ServiceB>()
@@ -42,6 +43,18 @@ namespace Sample
 
             serviceA.ExecuteSomething();
             serviceB.ExecuteSomething();
+
+            // TODO : remove after testing
+            // Test auto-decoration
+            var decorator = new PerformanceLoggingDecoratorFactory(provider.GetService<IPerformanceLogger>());
+            var perfServiceB = decorator.Decorate<IService>(serviceB);
+            perfServiceB.ExecuteSomething();
+            perfServiceB.ExecuteSomethingWithArgument("hello world");
+            perfServiceB.FindSomething();
+            perfServiceB.FindSomethingWithArguments("hello", 12);
+            var prop1 = perfServiceB.GetProperty;
+            var prop2 = perfServiceB.GetSetProperty;
+            perfServiceB.GetSetProperty = 71;
 
             // Causes the loggers to flush their logs, and the targets to end their parallel tasks
             provider.Dispose();

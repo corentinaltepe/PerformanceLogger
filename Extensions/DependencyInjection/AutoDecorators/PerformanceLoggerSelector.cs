@@ -18,7 +18,7 @@ namespace PerformanceLogger.Extensions.DependencyInjection.AutoDecorators
         public void Intercept(IInvocation invocation)
         {
             // Start logging
-            var track = _logger.Start(invocation.Method.Name);
+            var track = _logger.Start(invocation.TargetType.FullName + "_" + invocation.Method.Name);
 
             // Execute
             invocation.Proceed();

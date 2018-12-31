@@ -7,6 +7,9 @@ namespace Sample.SampleServices
     /// </summary>
     class ServiceB : IService
     {
+        public int GetProperty => 22;
+        public int GetSetProperty { get;set; }
+
         public void ExecuteSomething()
         {
             // Simulate a long executing operation

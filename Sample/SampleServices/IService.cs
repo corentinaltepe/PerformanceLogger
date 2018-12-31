@@ -4,8 +4,10 @@ namespace Sample.SampleServices
     /// Mock of an interface that will be called by the dependency injection service
     /// to resolve and decorate with performance logger.
     /// </summary>
-    interface IService
+    public interface IService
     {
+        int GetProperty { get; }
+        int GetSetProperty { get;set; }
         void ExecuteSomething();
         void ExecuteSomethingWithArgument(string arg1);
         int FindSomething();

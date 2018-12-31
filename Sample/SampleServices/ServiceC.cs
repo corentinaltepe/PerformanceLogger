@@ -5,6 +5,9 @@ namespace Sample.SampleServices
     /// </summary>
     class ServiceC
     {
+        public int GetProperty => 22;
+        public int GetSetProperty { get;set; }
+
         public void ExecuteSomething()
         {
             // Do nothing

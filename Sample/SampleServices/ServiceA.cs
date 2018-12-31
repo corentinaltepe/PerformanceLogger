@@ -14,6 +14,9 @@ namespace Sample.SampleServices
             _perfLogger = perfLogger;
         }
 
+        public int GetProperty => 22;
+        public int GetSetProperty { get;set; }
+
         public void ExecuteSomething()
         {
             var tracker = _perfLogger.Start("servicea_execute_something");

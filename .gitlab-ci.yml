@@ -31,9 +31,10 @@ integration-tests:
   image: microsoft/dotnet:2.2-sdk
   dependencies: []
   script:
-  - echo "todo"
-  only:
-  - none
+  - dotnet test Tests/Integration/Extensions/DependencyInjection.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+  artifacts:
+    untracked: true
+    expire_in: 1 day
 
 nuget-publication:
   stage: deploy

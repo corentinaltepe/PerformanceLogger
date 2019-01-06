@@ -1,7 +1,8 @@
 using System;
 using Xunit;
-using PerformanceLogger.Extensions.DependencyInjection.Test.Services;
 using Microsoft.Extensions.Logging.Abstractions;
+using PerformanceLogger.Extensions.AutoLogger;
+using PerformanceLogger.Extensions.DependencyInjection.Test.Services;
 
 namespace PerformanceLogger.Extensions.DependencyInjection.Test
 {

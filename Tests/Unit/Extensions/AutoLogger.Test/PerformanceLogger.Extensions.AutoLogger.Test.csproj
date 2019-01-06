@@ -15,7 +15,7 @@
 
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Extensions\DependencyInjection\PerformanceLogger.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\..\..\Extensions\AutoLogger\PerformanceLogger.Extensions.AutoLogger.csproj" />
   </ItemGroup>
 
 </Project>

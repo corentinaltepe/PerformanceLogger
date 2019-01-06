@@ -7,6 +7,7 @@ build:
   - dotnet build Extensions/Logging
   - dotnet build Extensions/Postgres
   - dotnet build Extensions/DependencyInjection
+  - dotnet build Extensions/AutoLogger
   - dotnet build Sample
   artifacts:
     untracked: true
@@ -19,7 +20,7 @@ unit-test:
   dependencies: []
   script:
   - dotnet test Tests/Unit/PerformanceLogger.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
-  - dotnet test Tests/Unit/Extensions/DependencyInjection.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+  - dotnet test Tests/Unit/Extensions/AutoLogger.Test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
   artifacts:
     untracked: true
     expire_in: 1 day
@@ -45,9 +46,11 @@ nuget-publication:
   - dotnet pack Extensions/Logging
   - dotnet pack Extensions/Postgres
   - dotnet pack Extensions/DependencyInjection
+  - dotnet pack Extensions/AutoLogger
   - dotnet nuget push PerformanceLogger/bin/Debug/PerformanceLogger.$CI_COMMIT_TAG.nupkg                                              -k $nuget_key -s https://api.nuget.org/v3/index.json
   - dotnet nuget push Extensions/Logging/bin/Debug/PerformanceLogger.Extensions.Logging.$CI_COMMIT_TAG.nupkg                          -k $nuget_key -s https://api.nuget.org/v3/index.json
   - dotnet nuget push Extensions/Postgres/bin/Debug/PerformanceLogger.Extensions.Postgres.$CI_COMMIT_TAG.nupkg                        -k $nuget_key -s https://api.nuget.org/v3/index.json
   - dotnet nuget push Extensions/DependencyInjection/bin/Debug/PerformanceLogger.Extensions.DependencyInjection.$CI_COMMIT_TAG.nupkg  -k $nuget_key -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push Extensions/AutoLogger/bin/Debug/PerformanceLogger.Extensions.AutoLogger.$CI_COMMIT_TAG.nupkg                    -k $nuget_key -s https://api.nuget.org/v3/index.json
   only:
   - tags

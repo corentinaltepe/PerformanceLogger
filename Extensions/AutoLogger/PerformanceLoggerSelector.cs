@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Castle.DynamicProxy;
 
-namespace PerformanceLogger.Extensions.DependencyInjection.AutoDecorators
+namespace PerformanceLogger.Extensions.AutoLogger
 {
     /// <summary>
     /// Decorates any call to method or property with performance logging

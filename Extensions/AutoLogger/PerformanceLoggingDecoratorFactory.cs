@@ -1,11 +1,13 @@
+using System.Runtime.CompilerServices;
 using Castle.DynamicProxy;
 
-namespace PerformanceLogger.Extensions.DependencyInjection.AutoDecorators
+[assembly: InternalsVisibleTo("PerformanceLogger.Extensions.AutoLogger.Test")]
+namespace PerformanceLogger.Extensions.AutoLogger
 {
     /// <summary>
-    /// Decorates any interface or class  T with performance logging
+    /// Decorates any interface or class T with performance logging
     /// </summary>
-    class PerformanceLoggingDecoratorFactory
+    public class PerformanceLoggingDecoratorFactory
     {
         private readonly IPerformanceLogger _logger;
         public PerformanceLoggingDecoratorFactory(IPerformanceLogger logger)

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
 
-namespace PerformanceLogger.Extensions.DependencyInjection.AutoDecorators
+namespace PerformanceLogger.Extensions.AutoLogger
 {
     class DecoratorSelector : IInterceptorSelector
     {

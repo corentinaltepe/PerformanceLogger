@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using PerformanceLogger.Extensions.DependencyInjection.AutoDecorators;
 using PerformanceLogger.Extensions.DependencyInjection.Test.Services;
 using Microsoft.Extensions.Logging.Abstractions;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PerformanceLogger.Extensions.DependencyInjection.AutoDecorators;
+using PerformanceLogger.Extensions.AutoLogger;
 using PerformanceLogger.Targets;
 
 [assembly: InternalsVisibleTo("PerformanceLogger.Extensions.DependencyInjection.Test")]

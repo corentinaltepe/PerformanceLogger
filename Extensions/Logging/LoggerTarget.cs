@@ -22,7 +22,7 @@ namespace PerformanceLogger.Extensions.Logging
         public void Log(PerformanceResult report)
         {
             // Format the entry and log it
-            _logger.LogInformation($"{report.StartDate.ToShortDateString()} {report.StartDate.ToShortTimeString()};{report.EventId};{report.Duration.TotalMilliseconds} ms;");
+            _logger.LogInformation($"{report.StartDate.ToShortDateString()} {report.StartDate.ToShortTimeString()};{report.EventId};{report.Duration.TotalMilliseconds} ms;{report.Ticks};");
         }
         
         public void Dispose()

@@ -11,5 +11,6 @@ namespace PerformanceLogger
         public string EventId { get; set; }
         public DateTime StartDate { get; set; }
         public TimeSpan Duration { get; set; }
+        public long Ticks { get;set; }
     }
 }

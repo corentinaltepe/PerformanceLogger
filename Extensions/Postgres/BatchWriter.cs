@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS {_tableName} (
     id		    SERIAL,
     eventId		text,
     date 		timestamp,
-    durationMs	double precision
+    durationMs	double precision,
+    ticks       bigint
 );";
                     cmd.ExecuteNonQuery();
                 }
@@ -106,11 +107,11 @@ CREATE TABLE IF NOT EXISTS {_tableName} (
             {
                 conn.Open();
                 // Note : the BINARY copy seems to not work on Postgres 9.2. Not tested with other versions.
-                using (var writer = conn.BeginTextImport($"COPY {_tableName} (eventid, date, durationms) FROM STDIN"))
+                using (var writer = conn.BeginTextImport($"COPY {_tableName} (eventid, date, durationms, ticks) FROM STDIN"))
                 {
                     // Read each log in the queue and write it in the SQL statement
                     while(_logs.TryDequeue(out var report)) {
-                        writer.Write($"{report.EventId}\t{report.StartDate.ToUniversalTime().ToString("o")}\t{report.Duration.TotalMilliseconds}\n");
+                        writer.Write($"{report.EventId}\t{report.StartDate.ToUniversalTime().ToString("o")}\t{report.Duration.TotalMilliseconds}\t{report.Ticks}\n");
                     }
                 }
             }

@@ -18,13 +18,14 @@ namespace PerformanceLogger.Extensions.AutoLogger
         public void Intercept(IInvocation invocation)
         {
             // Start logging
-            var track = _logger.Start(invocation.TargetType.FullName + "_" + invocation.Method.Name);
+            using(var track = _logger.Start(invocation.TargetType.FullName + "_" + invocation.Method.Name))
+            {
+                // Execute
+                invocation.Proceed();
 
-            // Execute
-            invocation.Proceed();
-
-            // End performance tracking
-            track.End();
+                // End performance tracking
+                track.End();
+            }
         }
     }
 }

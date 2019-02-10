@@ -24,8 +24,7 @@ namespace PerformanceLogger
         public IPerformanceLog Start(string eventId)
         {
             // Start tracking time
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+            var stopwatch = Stopwatch.StartNew();
 
             // Initiate what can be of the performance report
             var report = new PerformanceResult {
@@ -36,7 +35,6 @@ namespace PerformanceLogger
             return new PerformanceLog(stopwatch, report, _target);
         }
         
-
         /// <summary>
         /// Disposes the ITarget
         /// </summary>

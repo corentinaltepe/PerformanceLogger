@@ -16,6 +16,23 @@ namespace PerformanceLogger.Extensions.AutoLogger
         }
 
         /// <summary>
+        /// To avoid memory leaks, a generator should be instanciated once only, because it holds
+        /// reference to proxies in order to pool them.
+        /// </summary>
+        private ProxyGenerator _generator;
+
+        /// <summary>
+        /// Instanciates a new generator if not done already, then returns it.
+        /// </summary>
+        /// <returns></returns>
+        private ProxyGenerator GetGenerator()
+        {
+            if(_generator == null)
+                _generator = new ProxyGenerator();
+            return _generator;
+        }
+
+        /// <summary>
         /// Returns the service decorated with performance logging on all public
         /// methods and properties
         /// </summary>
@@ -23,7 +40,7 @@ namespace PerformanceLogger.Extensions.AutoLogger
         /// <returns></returns>
         public T Decorate<T>(T service) where T : class
         {
-            var generator = new ProxyGenerator();
+            var generator = GetGenerator();
             var loggerSelector = new PerformanceLoggerSelector(_logger);
             var decoratorSelector = new DecoratorSelector(loggerSelector);
             var options = new ProxyGenerationOptions

@@ -39,6 +39,24 @@ namespace PerformanceLogger.Extensions.DependencyInjection
         }
 
         /// <summary>
+        /// Holds a reference to the one and only PerformanceLoggingDecoratorFactory to avoid
+        /// memory leaks and keep performance good.
+        /// </summary>
+        private static PerformanceLoggingDecoratorFactory DecoratorFactory;
+
+        /// <summary>
+        /// Instanciates a new, single PerformanceLoggingDecoratorFactory if not done already, 
+        /// and then returns the singleton.
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        private static PerformanceLoggingDecoratorFactory GetDecoratorFactory(IServiceProvider provider) {
+            if(DecoratorFactory == null)
+                DecoratorFactory = new PerformanceLoggingDecoratorFactory(provider.GetService<IPerformanceLogger>());
+            return DecoratorFactory;
+        }
+
+        /// <summary>
         /// Adds PerformanceLogger to the interface or class T to be decorated
         /// </summary>
         /// <param name="services"></param>
@@ -49,7 +67,7 @@ namespace PerformanceLogger.Extensions.DependencyInjection
         {
             // Decorate the service with a performance logger decorator
             services.Decorate<T>((inner, provider) => { 
-                var decoratorFactory = new PerformanceLoggingDecoratorFactory(provider.GetService<IPerformanceLogger>());
+                var decoratorFactory = GetDecoratorFactory(provider);
                 return decoratorFactory.Decorate<T>(inner);
             });
             return services;

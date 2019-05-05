@@ -1,11 +1,8 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PerformanceLogger;
 using PerformanceLogger.Extensions.Logging;
 using PerformanceLogger.Extensions.Postgres;
 using PerformanceLogger.Extensions.DependencyInjection;
-using System.Threading;
 using Sample.SampleServices;
 
 namespace Sample

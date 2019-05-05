@@ -39,6 +39,7 @@ namespace PerformanceLogger.Extensions.Postgres
             // Execute this method only once, at first call
             if(_tableCreationChecked)
                 return;
+            _tableCreationChecked = true;
 
             using (var conn = new NpgsqlConnection(_connectionString))
             {

@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using Microsoft.Extensions.Logging.Abstractions;
 using PerformanceLogger.Extensions.AutoLogger;

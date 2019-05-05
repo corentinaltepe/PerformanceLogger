@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using Castle.DynamicProxy;
 
 namespace PerformanceLogger.Extensions.AutoLogger

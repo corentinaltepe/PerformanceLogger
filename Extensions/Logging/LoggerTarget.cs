@@ -1,4 +1,3 @@
-using System;
 using PerformanceLogger.Targets;
 using Microsoft.Extensions.Logging;
 

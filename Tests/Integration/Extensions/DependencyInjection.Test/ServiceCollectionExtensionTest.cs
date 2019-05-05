@@ -1,11 +1,8 @@
-using System;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
 using DependencyInjection.SampleServices;
 using PerformanceLogger.Extensions.Logging;
 using PerformanceLogger.Extensions.Postgres;
-using PerformanceLogger.Extensions.DependencyInjection;
-using Moq;
 using Microsoft.Extensions.Logging;
 
 namespace PerformanceLogger.Extensions.DependencyInjection.Test

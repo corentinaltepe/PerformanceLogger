@@ -1,5 +1,4 @@
-﻿using System;
-using PerformanceLogger.Targets;
+﻿using PerformanceLogger.Targets;
 
 namespace PerformanceLogger.Extensions.Postgres
 {

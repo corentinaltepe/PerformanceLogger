@@ -3,8 +3,6 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Npgsql;
-using NpgsqlTypes;
-using PerformanceLogger;
 
 namespace PerformanceLogger.Extensions.Postgres
 {
@@ -61,7 +59,7 @@ CREATE TABLE IF NOT EXISTS {_tableName} (
             }
         }
 
-        private object writeLock = new object();
+        private readonly object writeLock = new object();
         /// <summary>
         /// Adds a log to be written to the database. Can be called concurrently.
         /// </summary>

@@ -9,19 +9,14 @@ namespace PerformanceLogger.Extensions.Postgres
     /// <summary>
     /// Writes logs to a Postgres database by batches read from the queue of logs
     /// </summary>
-    class BatchWriter : IDisposable
+    class BatchWriter
     {
-        /// <summary>
-        /// Task to be executed in a separate thread for writing the logs to
-        /// the database by batches.
-        /// </summary>
-        /// <returns></returns>
-        private Task BatchWriting;
-
         private readonly string _connectionString;
         private readonly string _tableName;
         private readonly ILogger<BatchWriter> _logger;
         private readonly ConcurrentQueue<PerformanceResult> _logs = new ConcurrentQueue<PerformanceResult>();
+
+        private bool _isWriting = false;
         
         public BatchWriter(string connectionString, string tableName, ILogger<BatchWriter> logger)
         {
@@ -72,13 +67,20 @@ CREATE TABLE IF NOT EXISTS {_tableName} (
 
             // Start the batch writing process if not started already
             lock(writeLock) {
-                if(BatchWriting is null || BatchWriting.IsCompleted)
-                {
-                    // Initialize the task to be executed in parallel
-                    BatchWriting = new Task(WriteASingleBatch);
-                    BatchWriting.Start();
-                }
+                if (_isWriting)
+                    return;
+                _isWriting = true;
             }
+
+            // Initialize the task to be executed in parallel
+            var writingTask = new Task(WriteASingleBatch);
+            writingTask.ContinueWith((t) =>
+            {
+                lock(writeLock) {
+                    _isWriting = false;
+                }
+            });
+            writingTask.Start();
         }
 
         private void WriteASingleBatch()
@@ -114,15 +116,6 @@ CREATE TABLE IF NOT EXISTS {_tableName} (
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Waits synchronously for the task to terminate before disposing
-        /// </summary>
-        public void Dispose()
-        {
-            if(BatchWriting != null && !BatchWriting.IsCompleted && BatchWriting.Status != TaskStatus.Created)
-                BatchWriting.Wait();
         }
     }
 }

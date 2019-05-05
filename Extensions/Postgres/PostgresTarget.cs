@@ -21,7 +21,7 @@ namespace PerformanceLogger.Extensions.Postgres
 
         public void Dispose()
         {
-            _writer.Dispose();
+            // Nothing to dispose
         }
     }
 }

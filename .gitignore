@@ -4,6 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 coverage.cobertura.xml
+coverage.json
+coverage.xml
 
 # User-specific files
 *.suo

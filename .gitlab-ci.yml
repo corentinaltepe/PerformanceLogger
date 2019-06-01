@@ -1,3 +1,10 @@
+stages:
+- build
+- test
+- quality
+- deploy
+
+
 build:
   stage: build
   image: microsoft/dotnet:2.2-sdk

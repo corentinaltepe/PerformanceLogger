@@ -55,10 +55,10 @@ sonar:
   script:
   - dotnet restore
   - dotnet clean
-  - dotnet-sonarscanner begin /k:"performancelogger" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="$sonar_key" /d:sonar.cs.opencover.reportsPaths="Tests/**/coverage.xml"
+  - dotnet-sonarscanner begin /k:"performancelogger" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="%sonar_key%" /d:sonar.cs.opencover.reportsPaths="Tests/**/coverage.xml"
   - dotnet build
   - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude=\"[Test.Base]*,[*.Test]*,[*.Tests]*,[xunit.*]*\" /p:CoverletOutput="coverage.xml"
-  - dotnet-sonarscanner end /d:sonar.login="$sonar_key"
+  - dotnet-sonarscanner end /d:sonar.login="%sonar_key%"
   except:
   - tags
 
